@@ -2,7 +2,8 @@
 
 
 https://www.youtube.com/watch?v=iuzAvDtXwks
-
+https://github.com/academind/aws-demos
+https://github.com/academind/aws-demos/blob/main/extra-files/userdata/userdata-with-dynamodb.sh
 
 https://github.com/RodrigoMvs123/IAM-Roles-EC2-Instance-Profile---Connecting-EC2-to-DynamoDB/edit/main/README.md
 
