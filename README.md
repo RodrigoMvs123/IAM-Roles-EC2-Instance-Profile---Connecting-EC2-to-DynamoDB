@@ -6,7 +6,7 @@ https://www.youtube.com/watch?v=iuzAvDtXwks
 
 https://github.com/RodrigoMvs123/IAM-Roles-EC2-Instance-Profile---Connecting-EC2-to-DynamoDB/edit/main/README.md
 
-
+https://github.com/RodrigoMvs123/IAM-Roles-EC2-Instance-Profile---Connecting-EC2-to-DynamoDB/blame/main/README.md
 
 
 data.js
