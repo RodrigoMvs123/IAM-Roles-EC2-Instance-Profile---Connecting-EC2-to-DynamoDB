@@ -1,16 +1,13 @@
 # IAM-Roles-EC2-Instance-Profile---Connecting-EC2-to-DynamoDB
 
+- https://www.youtube.com/watch?v=iuzAvDtXwks
+- https://github.com/academind/aws-demos
+- https://github.com/academind/aws-demos/blob/main/extra-files/userdata/userdata-with-dynamodb.sh
+- https://github.com/RodrigoMvs123/IAM-Roles-EC2-Instance-Profile---Connecting-EC2-to-DynamoDB/edit/main/README.md
+- https://github.com/RodrigoMvs123/IAM-Roles-EC2-Instance-Profile---Connecting-EC2-to-DynamoDB/blame/main/README.md
 
-https://www.youtube.com/watch?v=iuzAvDtXwks
-https://github.com/academind/aws-demos
-https://github.com/academind/aws-demos/blob/main/extra-files/userdata/userdata-with-dynamodb.sh
-
-https://github.com/RodrigoMvs123/IAM-Roles-EC2-Instance-Profile---Connecting-EC2-to-DynamoDB/edit/main/README.md
-
-https://github.com/RodrigoMvs123/IAM-Roles-EC2-Instance-Profile---Connecting-EC2-to-DynamoDB/blame/main/README.md
-
-
-data.js
+**data.js**
+```javascript
 const { v4: generateId } = require('uuid');
 const dynamodb = require('@aws-sdk/client-dynamodb');
 const {
@@ -20,12 +17,10 @@ const {
   ScanCommand,
   QueryCommand,
 } = require('@aws-sdk/lib-dynamodb');
-
 const client = new dynamodb.DynamoDBClient({
   region: 'us-east-1',
 });
 const ddbDocClient = new DynamoDBDocumentClient(client);
-
 function addNewTopic(topicData) {
   const cmd = new PutCommand({
     Item: {
@@ -38,7 +33,6 @@ function addNewTopic(topicData) {
   });
   return ddbDocClient.send(cmd);
 }
-
 function addNewOpinion(topicId, opinionData) {
   const cmd = new PutCommand({
     Item: {
@@ -52,16 +46,13 @@ function addNewOpinion(topicId, opinionData) {
   });
   return ddbDocClient.send(cmd);
 }
-
 async function getTopics() {
   const cmd = new ScanCommand({
     TableName: 'Topics',
   });
-
   const response = await ddbDocClient.send(cmd);
   const items = response.Items;
   console.log(items);
-
   return items.map((item) => ({
     title: item.Title,
     user: item.User,
@@ -69,7 +60,6 @@ async function getTopics() {
     statement: item.Statement,
   }));
 }
-
 async function getTopic(id) {
   const cmd = new GetCommand({
     Key: {
@@ -77,10 +67,8 @@ async function getTopic(id) {
     },
     TableName: 'Topics',
   });
-
   const response = await ddbDocClient.send(cmd);
   const topicData = response.Item;
-
   const cmd2 = new QueryCommand({
     KeyConditions: {
       TopicId: {
@@ -90,10 +78,8 @@ async function getTopic(id) {
     },
     TableName: 'Opinions',
   });
-
   const response2 = await ddbDocClient.send(cmd2);
   const opinions = response2.Items;
-
   const topic = {
     id: topicData.Id,
     title: topicData.Title,
@@ -106,13 +92,10 @@ async function getTopic(id) {
       text: opinion.Text,
     })),
   };
-
   return topic;
 }
-
 exports.addNewTopic = addNewTopic;
 exports.addNewOpinion = addNewOpinion;
 exports.getTopics = getTopics;
 exports.getTopic = getTopic;
-
-
+```
